@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phantom studioZ | Cart</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+  <script> (function(){ emailjs.init("R8YQ6uFuEg24lKXoj"); })(); </script>
+  <style>
+    body { font-family: Arial; margin: 0; background: #f0f0f0; }
+    header { background: #2c2c2c; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    #cart { padding: 20px; }
+    .cart-item { display: flex; justify-content: space-between; margin: 10px 0; }
+    .cart-item button { background: red; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+    form input, form select { width: 100%; margin: 10px 0; padding: 10px; }
+    form input[type="submit"] { background: green; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Phantom studioZ</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="retail.html">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="services.html">Services</a>
+    <a href="academy.html">Academy</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<div id="cart">
+  <ul id="cart-items"></ul>
+
+  <label>Delivery Option:</label>
+  <select id="delivery" onchange="updateCart()">
+    <option value="0|Pick-up (Free)">Pick-up (Free)</option>
+    <option value="50|Standard Delivery">Standard Delivery</option>
+    <option value="100|Express Delivery">Express Delivery</option>
+  </select>
+
+  <p><strong>Total:</strong> R<span id="total">0</span></p>
+
+  <form id="order-form">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="text" name="email" placeholder="Email" required>
+    <input type="text" name="address" placeholder="Street Address" required>
+    <input type="text" name="city" placeholder="City" required>
+    <input type="text" name="zip" placeholder="Postal Code" required>
+    <input type="hidden" name="cart" id="cart-data">
+    <input type="hidden" name="total" id="cart-total">
+    <input type="hidden" name="delivery_details" id="delivery-details">
+    <input type="submit" value="Submit Order">
+    <input type="button" value="Reset Cart" onclick="resetCart()">
+  </form>
+</div>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem("phantom_cart") || "[]");
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("phantom_cart", JSON.stringify(cart));
+    updateCart();
+  }
+
+  function resetCart() {
+    cart = [];
+    localStorage.removeItem("phantom_cart");
+    document.getElementById("delivery").value = "0|Pick-up (Free)";
+    updateCart();
+  }
+
+  function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    const cartData = document.getElementById("cart-data");
+    const cartTotal = document.getElementById("cart-total");
+    const deliveryDetails = document.getElementById("delivery-details");
+
+    cartItems.innerHTML = "";
+    let total = 0;
+    let summary = [];
+
+    const [fee, label] = document.getElementById("delivery").value.split("|");
+    const deliveryFee = parseFloat(fee);
+
+    cart.forEach((item, i) => {
+      total += item.price;
+      summary.push(`${item.name} - R${item.price}`);
+      cartItems.innerHTML += `<li class="cart-item">${item.name} - R${item.price} <button onclick="removeFromCart(${i})">X</button></li>`;
+    });
+
+    total += deliveryFee;
+
+    document.getElementById("total").textContent = total;
+    cartData.value = summary.join(", ");
+    cartTotal.value = total;
+    deliveryDetails.value = `${label} - R${fee}`;
+  }
+
+  document.getElementById("order-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    emailjs.sendForm("service_ps73eee", "template_xkluzkn", this).then(
+      () => {
+        alert("Order sent successfully!");
+        resetCart();
+        this.reset();
+      },
+      err => alert("Failed to send order. Please try again.")
+    );
+  });
+
+  updateCart();
+</script>
+</body>
+</html>
 
