@@ -20,15 +20,13 @@
     }
     header h1 {
       margin: 0;
-      font-size: 24px;
       color: white;
-      font-weight: bold;
     }
     nav a {
       color: white;
       margin-left: 1.5rem;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: bold;
     }
     nav a:hover {
       color: #ff00cc;
@@ -41,7 +39,7 @@
       color: #ff33cc;
     }
     ul {
-      list-style: none;
+      list-style-type: none;
       padding: 0;
     }
     li {
@@ -81,29 +79,35 @@
   <div class="container">
     <h2>Your Cart</h2>
     <ul id="cartItems"></ul>
+    <h3 id="total"></h3>
     <button class="checkout-btn" onclick="checkout()">Proceed to Payment</button>
   </div>
 
   <script>
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const cartItems = document.getElementById("cartItems");
+    const totalDisplay = document.getElementById("total");
+    let total = 0;
 
     if (cart.length === 0) {
       cartItems.innerHTML = "<li>Your cart is empty.</li>";
     } else {
       cart.forEach(item => {
         const li = document.createElement("li");
-        li.textContent = item.name;
+        li.textContent = `${item.name} - R${item.price.toFixed(2)}`;
         cartItems.appendChild(li);
+        total += item.price;
       });
+      totalDisplay.textContent = `Total: R${total.toFixed(2)}`;
     }
 
     function checkout() {
       alert("Redirecting to payment...");
-      // Replace with actual payment integration
-      window.location.href = "https://pay.yoco.com"; // Or your chosen provider
+      // Replace below with actual payment redirect
+      window.location.href = "https://pay.yoco.com"; // or other payment gateway
     }
   </script>
 </body>
 </html>
+
 
