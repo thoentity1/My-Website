@@ -1,45 +1,137 @@
-<script>
-// Step 1: Send Invite to Guest
-document.getElementById('inviteForm').addEventListener('submit', e => {
-  e.preventDefault();
-  let guestname = document.getElementById('guestname').value.trim();
-  let admit = document.getElementById('admit').value.trim();
-  let guestphone = document.getElementById('guestphone').value.trim();
-
-  if (!guestname || !admit || !guestphone) {
-    alert("⚠️ Please complete all required fields.");
-    return;
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Imtiaz & Amaarah — Invitation & RSVP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7efe8;
+    --accent: #d99b83;
+    --text: #262626;
+    --muted: #6b6461;
+    --max-width: 1100px;
   }
-
-  guestphone = guestphone.replace(/\D/g, "");
-  if (!guestphone.startsWith("27")) {
-    alert("⚠️ Please enter number with country code, e.g. 27821234567");
-    return;
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    background: var(--bg);
+    height: 100%;
   }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .wrap {
+    max-width: var(--max-width);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    min-height: 680px;
+    background: #fff;
+  }
+  .invite-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .invite-container img {
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 3px solid var(--accent);
+    border-radius: 10px;
+    display: block;
+  }
+  .rsvp {
+    width: 420px;
+    background: #fafafa;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .rsvp h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  form label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+    color: var(--muted);
+  }
+  input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+  .btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+    transition: 0.3s;
+  }
+  .btn:hover {
+    background: #c6846c;
+  }
+  .section {
+    margin-bottom: 28px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    padding: 20px;
+    background: #fff;
+  }
+  @media(max-width:900px){
+    .wrap {
+      flex-direction: column;
+    }
+    .invite-container {
+      padding: 15px;
+      justify-content: center;
+    }
+    .invite-container img {
+      width: 80%;
+      max-height: 50vh;
+      margin-bottom: 20px;
+    }
+    .rsvp {
+      width: 100%;
+      max-height: 60vh;
+      padding: 20px;
+      overflow-y: auto;
+    }
+  }
+</style>
+</head>
+<body>
 
-  const rsvpLink = "https://thoentity1.github.io/nikahI-A/";
-  const msg = `💍 *Wedding Invitation* 💍  
-
-Dear ${guestname},  
-
-You are invited to the nikah 🕌 and reception of  
-✨ _Imtiaz Kader & Ammaarah Minnie_ ✨  
-
-🎟️ *Admits:* ${admit}  
-
-📅 *Date:* Saturday, 01 November 2025  
-🕑 *Time:* 2:00 PM  
-🍽️ *Reception:* Will follow thereafter  
-📍 *Venue:* 45 Cotswold Road, Florida Hills, Roodepoort 1716  
-
-👉 Please RSVP before *10 October 2025* here:  
-🔗 ${rsvpLink}  
-
-🌸 With joy in our hearts and duʿās 🤲,  
-we invite you to share in this blessed beginning, In Shaa Allah. 🌸`;
-
-  window.open(`https://wa.me/${guestphone}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
-  alert("✅ Invitation opened in WhatsApp!");
-  e.target.reset();
-});
-</script>
+<div class="wrap">
+  <!-- Left: invitation image -->
+  <div class="invite-container">
+    <img src="Amaarah & Imtiaz.jpg" alt="Wedding Invitation" 
+         onerror="this.style.display='none'; this.parentNode.inne
