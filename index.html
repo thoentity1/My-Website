@@ -170,24 +170,14 @@ inviteForm.addEventListener('submit', e => {
 
   const rsvpLink = "https://thoentity1.github.io/nikahI-A/";
 
-  // Invitation message with emojis
-  const msg = `💍 Wedding Invitation 💍
+  // Fixed RSVP link
+  const rsvpLink = "https://thoentity1.github.io/nikahSNZ/";
 
-Dear ${guestname},
+  // Styled WhatsApp message
+  const msg = `💍 *Wedding Invitation* 💍\n\nDear ${guestname},\n\nYou are invited to the wedding of\n✨ _Imtiaz Kader & Ammaarah Minnie_ ✨\n\n🎟 Admits: ${admit}\n\n Date: Saturday, 1 November 2025\n🕒 Time: 2:00 PM Nikah & Reception to follow\n📍 Venue: Nikah and reception venue at 45 Cotswold Road, Floria Hills, Roodepoort, 1716\n\n👉 Please RSVP before 6 November 2025, here: ${rsvpLink}\n\nWe look forward to celebrating this special day with you 💖`;
 
-You are invited to the wedding of
-✨ Imtiaz & Amaarah ✨
-
-🎟 Admits: ${admit}
-
-📅 Date: Saturday, 01 November 2025
-🕒 Time: 2:00 PM Nikah & Reception will commence thereafter
-📍 Venue: 45 Cotswold Road, Florida Hills, Roodepoort 1716
-
-👉 Please RSVP before 10 October 2025 here: ${rsvpLink}`;
-
-  window.open(`https://wa.me/${guestphone}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
-  alert("Invitation sent via WhatsApp!");
+  const url = "https://wa.me/" + guestphone + "?text=" + encodeURIComponent(msg);
+  window.open(url, "_blank");
   inviteForm.reset();
 });
 </script>
