@@ -42,6 +42,7 @@
     background: #fff;
   }
 
+  /* Left: invitation image */
   .invite-container {
     flex: 1;
     display: flex;
@@ -62,6 +63,7 @@
     display: block;
   }
 
+  /* Right: RSVP panel */
   .rsvp {
     width: 420px;
     background: #fafafa;
@@ -145,12 +147,15 @@
 <body>
 
 <div class="wrap">
+  <!-- Left: invitation image -->
   <div class="invite-container">
     <img src="Amaarah & Imtiaz.jpg" alt="Wedding Invitation" 
          onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'color:red;text-align:center\'>Invitation image not found</div>'">
   </div>
 
+  <!-- Right: Invite & RSVP panel -->
   <aside class="rsvp">
+    <!-- Step 1: Send Invitation -->
     <div class="section">
       <h2>💌 Send Invite</h2>
       <form id="inviteForm">
@@ -167,6 +172,7 @@
       </form>
     </div>
 
+    <!-- Step 2: RSVP Back -->
     <div class="section">
       <h2>📝 RSVP</h2>
       <form id="rsvpForm">
@@ -187,7 +193,7 @@
 </div>
 
 <script>
-// ✅ Send Invite to Guest
+// Step 1: Send Invite to Guest
 document.getElementById('inviteForm').addEventListener('submit', e => {
   e.preventDefault();
   let guestname = document.getElementById('guestname').value.trim();
@@ -206,32 +212,31 @@ document.getElementById('inviteForm').addEventListener('submit', e => {
   }
 
   const rsvpLink = "https://thoentity1.github.io/nikahI-A/";
-  const msg = 
-`💍 *Wedding Invitation* 💍
+  const msg = `💍 *Wedding Invitation* 💍
 
 Dear ${guestname},
 
-✨ You are invited to the *Nikah* 🕌 and reception of  
-💞 _Imtiaz Kader & Ammaarah Minnie_ 💞
+You are invited to the nikah 🕌 and reception of  
+✨ _Imtiaz Kader & Ammaarah Minnie_ ✨
 
 🎟 *Admits:* ${admit}
 
 📅 *Date:* Saturday, 01 November 2025  
 🕒 *Time:* 2:00 PM  
 🍽️ *Reception:* Will follow thereafter  
-📍 *Venue:* 45 Cotswold Road, Florida Hills, Roodepoort 1716
+📍 *Venue:* 45 Cotswold Road, Florida Hills, Roodepoort 1716  
 
-👉 Please RSVP before *10 October 2025*:  
-${rsvpLink}
+👉 Please RSVP before *10 October 2025* here: ${rsvpLink}  
 
-🌸 With joy in our hearts and duʿās 🤲, we invite you to share in this blessed beginning, *In Shaa Allah*. 🌸`;
+🌸 With joy in our hearts and duʿās 🤲, we invite you to share in this blessed beginning, In Shaa Allah. 🌸
+`;
 
-  window.open(`https://wa.me/${guestphone}?text=${encodeURIComponent(msg)}`, "_blank");
-  alert("✅ Invitation ready to send in WhatsApp!");
+  window.open(`https://wa.me/${guestphone}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  alert("✅ Invitation opened in WhatsApp!");
   e.target.reset();
 });
 
-// ✅ Guest RSVP to You
+// Step 2: Guest RSVP back to you
 document.getElementById('rsvpForm').addEventListener('submit', e => {
   e.preventDefault();
   let fullname = document.getElementById('fullname').value.trim();
@@ -242,15 +247,13 @@ document.getElementById('rsvpForm').addEventListener('submit', e => {
     return;
   }
 
-  const msg = 
-`📩 *RSVP for Imtiaz & Amaarah*  
+  const msg = `📩 *RSVP for Imtiaz & Amaarah*  
 
 👤 Name: ${fullname}  
 ✅ Attending: ${attending}`;
-
-  const phone = "27748741008"; // your WhatsApp number
-  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank");
-  alert("✅ RSVP ready to send in WhatsApp!");
+  const phone = "27748741008"; // Your WhatsApp number
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  alert("✅ RSVP opened in WhatsApp!");
   e.target.reset();
 });
 </script>
