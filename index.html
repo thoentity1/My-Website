@@ -1,53 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Phantom studioZ | Fifty Shades of Beauty</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="navbar">
-    <h1>Phantom studioZ</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="retail.html">Retail</a>
-      <a href="#">Services</a>
-      <a href="#">Academy</a>
-      <a href="#">Contact</a>
-    </nav>
-      </header>
+<form id="inviteForm">
+  <input type="text" id="guestname" placeholder="Guest Name" required>
+  <input type="text" id="admit" placeholder="Number of Admits" required>
+  <input type="text" id="guestphone" placeholder="WhatsApp Number (e.g. 27621234567)" required>
+  <button type="submit">Send Invite</button>
+</form>
 
-  <section style="padding: 80px 20px; text-align: center;">
-    <h2>Fifty Shades of Beauty</h2>
-    <p style="max-width: 600px; margin: auto; font-size: 1.1rem;">
-      Step into your shade. At Phantom studioZ, we don't just do beauty — we seduce it. From luxurious massages to bold braids and flawless nails, discover your deepest shade of expression.
-    </p>
-    <button class="button" style="margin-top: 30px;">Book Your Glow</button>
-  </section>
+<script>
+const inviteForm = document.getElementById("inviteForm");
 
-  <section style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 40px 20px;">
-    <div class="card">
-      <h3>Hair & Braids</h3>
-      <p>Artistic braids, silk presses, and shade-defining styles tailored just for you.</p>
-    </div>
-    <div class="card">
-      <h3>Facials & Glow</h3>
-      <p>Glow deeper with premium facial treatments and seductive skin care rituals.</p>
-    </div>
-    <div class="card">
-      <h3>Nails & Art</h3>
-      <p>From minimalist sets to statement hands, your fingertips will do the talking.</p>
-    </div>
-    <div class="card">
-      <h3>Make up and Artistry</h3>
-      <p>Inner shade of choice.</p>
-    </div>
-  </section>
+inviteForm.addEventListener("submit", function(e) {
+  e.preventDefault();
 
-  <footer>
-    © 2025 Phantom studioZ — Unleash Your Inner Shade | 
-  </footer>
-</body>
-</html>
+  const guestname = document.getElementById("guestname").value;
+  const admit = document.getElementById("admit").value;
+  const guestphone = document.getElementById("guestphone").value;
+
+  // RSVP link
+  const rsvpLink = "https://thoentity1.github.io/nikahI-A/";
+  const msg = `💍 *Wedding Invitation* 💍
+
+Dear ${guestname},
+
+You are invited to the nikah and reception of
+✨ _Imtiaz Kader & Ammaarah Minnie_ ✨
+
+🎟 *Admits:* ${admit}
+
+📅 *Date:* Saturday, 01 November 2025  
+🕒 *Time:* 2:00 PM  
+🍽 *Reception:* Will follow thereafter  
+📍 *Venue:* 45 Cotswold Road, Florida Hills, Roodepoort 1716  
+
+👉 Please RSVP before *10 October 2025* here: ${rsvpLink}  
+
+🌸 With joy in our hearts and duʿās on our lips, we invite you to share in this blessed beginning, In Shaa Allah. 🌸
+`;
+
+  // Open WhatsApp
+  window.open(
+    `https://wa.me/${guestphone}?text=${encodeURIComponent(msg)}`,
+    "_blank",
+    "noopener"
+  );
+
+  alert("Invitation sent via WhatsApp!");
+  inviteForm.reset();
+});
+</script>
