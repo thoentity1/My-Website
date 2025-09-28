@@ -5,133 +5,128 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Imtiaz & Amaarah — Invitation</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-
 <style>
-  :root {
-    --bg: #f7efe8;
-    --accent: #d99b83;
-    --text: #262626;
-    --muted: #6b6461;
-    --max-width: 1100px;
-  }
-
-  html, body {
-    margin: 0;
-    height: 100%;
-    font-family: "Roboto", sans-serif;
-    background: var(--bg);
-  }
-
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .wrap {
-    max-width: var(--max-width);
-    width: 100%;
-    display: flex;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    min-height: 680px;
-    background: #fff;
-  }
-
-  .invite-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    padding: 10px;
-  }
-
-  .invite-container img {
-    max-height: 60vh;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    border: 3px solid #d99b83;
-    border-radius: 10px;
-    object-fit: contain;
-    display: block;
-  }
-
-  .invite-panel {
-    width: 420px;
-    background: #fafafa;
-    padding: 36px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .invite-panel h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 22px;
-    margin-bottom: 12px;
-    font-weight: 400;
-  }
-
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 14px;
-    font-size: 14px;
-  }
-
-  .btn {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 8px;
-    transition: 0.3s;
-    display: inline-block;
-    text-align: center;
-  }
-
-  .btn:hover {
-    background: #c6846c;
-  }
-
-  @media(max-width:900px){
-    .wrap {
-      flex-direction: column;
-    }
-    .invite-panel {
-      width: 100%;
-    }
-    .invite-container img {
-      max-height: 40vh;
-    }
-  }
-
-  .fallback {
-    font-size: 16px;
-    color: red;
-    text-align: center;
-  }
+  :root { --bg:#f7efe8; --accent:#d99b83; --muted:#6b6461; --max-width:1100px; }
+  html,body{margin:0;height:100%;font-family:"Roboto",sans-serif;background:var(--bg)}
+  body{display:flex;justify-content:center;align-items:center;padding:20px}
+  .wrap{max-width:var(--max-width);width:100%;display:flex;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);min-height:680px;background:#fff}
+  .invite-container{flex:1;display:flex;justify-content:center;align-items:center;background:#fff;padding:10px}
+  .invite-container img{max-height:60vh;max-width:100%;width:auto;height:auto;border:3px solid #d99b83;border-radius:10px;object-fit:contain;display:block}
+  .invite-panel{width:420px;background:#fafafa;padding:36px;display:flex;flex-direction:column;justify-content:center}
+  .invite-panel h2{font-family:"Playfair Display",serif;font-size:22px;margin-bottom:12px;font-weight:400}
+  label{display:block;font-size:13px;margin-bottom:4px;color:var(--muted)}
+  input{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;margin-bottom:14px;font-size:14px}
+  .btn{background:var(--accent);color:#fff;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-size:14px;margin-top:8px;transition:.3s}
+  .btn:hover{background:#c6846c}
+  .fallback{text-align:center;color:#c0392b}
+  @media(max-width:900px){.wrap{flex-direction:column}.invite-panel{width:100%}.invite-container img{max-height:40vh}}
 </style>
 </head>
 <body>
 
 <div class="wrap">
   <div class="invite-container">
-    <img src="Amaarah & Imtiaz.jpg" alt="Wedding Invitation"
-         onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'fallback\'>Invitation image not found. Check file name and path.</div>'">
+    <!-- Use a filename without spaces if possible, or update this src to your actual file -->
+    <img src="Amaarah_&_Imtiaz.jpg" alt="Wedding Invitation"
+         onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\\'fallback\\'>Invitation image not found. Check file name and path.</div>'">
   </div>
 
   <aside class="invite-panel">
     <h2>Send Invitation</h2>
-    <form id="inviteForm">
+    <form id="inviteForm" autocomplete="off">
       <label for="guestname">Guest Name *</label>
-      <input type="text" id="g
+      <input type="text" id="guestname" required>
+
+      <label for="admit">Number of Admits *</label>
+      <input type="number" id="admit" min="1" max="10" required>
+
+      <label for="guestphone">Guest WhatsApp Number (with country code) *</label>
+      <input type="tel" id="guestphone" placeholder="e.g. +27 82 123 4567 or 082 123 4567" required>
+
+      <button type="submit" class="btn">Send Invitation via WhatsApp</button>
+    </form>
+  </aside>
+</div>
+
+<script>
+/**
+ * normalizePhone:
+ * - strips non-digits
+ * - handles +27, 0027, 0xxxx -> converts to 27xxxxxxxxx
+ * - if short local number provided (e.g. 821234567 or 0821234567) will attempt to convert to 27821234567
+ */
+function normalizePhone(raw) {
+  if (!raw) return "";
+  let d = raw.replace(/\D/g, "");
+  if (!d) return "";
+  // remove leading international 00 if present
+  if (d.startsWith("00")) d = d.slice(2);
+  // if it starts with 0 (local), replace leading 0 with 27
+  if (d.startsWith("0")) d = "27" + d.slice(1);
+  // if it already starts with country code 27, ok
+  if (d.startsWith("27")) return d;
+  // if it's short (9 or 10 digits) assume local and prefix 27
+  if (d.length <= 10) return "27" + d;
+  // otherwise return as-is (caller will validate)
+  return d;
+}
+
+document.getElementById('inviteForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const guestname = document.getElementById('guestname').value.trim();
+  const admit = document.getElementById('admit').value.trim();
+  const rawPhone = document.getElementById('guestphone').value.trim();
+
+  if (!guestname || !admit || !rawPhone) {
+    alert("Please complete all required fields.");
+    return;
+  }
+
+  const guestphone = normalizePhone(rawPhone);
+
+  // Basic validation for South Africa numbers (should be 11 digits: 27 + 9)
+  if (!/^\d{11,}$/.test(guestphone)) {
+    alert("Phone number looks invalid after formatting. Please include country code (e.g. +27 or 27).");
+    return;
+  }
+
+  const rsvpLink = "https://thoentity1.github.io/nikahI-A/";
+
+  // Exact invitation text with plain emojis
+  const msg = `💍 Wedding Invitation 💍
+
+Dear ${guestname},
+
+You are invited to the wedding of
+✨ Imtiaz & Amaarah ✨
+
+🎟 Admits: ${admit}
+
+📅 Date: Saturday, 01 November 2025
+🕒 Time: 2:00 PM Nikah & Reception will commence thereafter
+📍 Venue: 45 Cotswold Road, Florida Hills, Roodepoort 1716
+
+👉 Please RSVP before 10 October 2025 here: ${rsvpLink}`;
+
+  const waUrl = `https://wa.me/${guestphone}?text=${encodeURIComponent(msg)}`;
+
+  // Try to open WhatsApp. If popup is blocked, copy link to clipboard and show it to user.
+  const newWindow = window.open(waUrl, "_blank", "noopener");
+  if (!newWindow) {
+    // popup blocked — copy URL to clipboard if possible, otherwise prompt the URL for manual copy
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(waUrl);
+        alert("Popup blocked. WhatsApp link copied to clipboard — paste it into your browser to send the message.");
+      } else {
+        // fallback
+        prompt("Popup blocked. Copy this link and paste it into your browser to send the WhatsApp invite:", waUrl);
+      }
+    } catch (err) {
+      prompt("Popup blocked. Copy this link and paste it into your browser to send the WhatsApp invite:", waUrl);
+    }
+  } else {
+    // opened successfully
+    try { newWindow.focus(); } catch(e) {}
+  }
