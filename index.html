@@ -157,36 +157,36 @@
   <aside class="rsvp">
     <!-- Step 1: Send Invitation -->
     <div class="section">
-      <h2>Send Invite</h2>
+      <h2>💌 Send Invite</h2>
       <form id="inviteForm">
-        <label for="guestname">Guest Name *</label>
+        <label for="guestname">👤 Guest Name *</label>
         <input type="text" id="guestname" required>
 
-        <label for="admit">Number of Admits *</label>
+        <label for="admit">🎟 Number of Admits *</label>
         <input type="number" id="admit" min="1" max="10" required>
 
-        <label for="guestphone">Guest WhatsApp Number (with country code) *</label>
+        <label for="guestphone">📱 Guest WhatsApp Number (with country code) *</label>
         <input type="tel" id="guestphone" placeholder="e.g. 27821234567" required>
 
-        <button type="submit" class="btn">Send Invitation</button>
+        <button type="submit" class="btn">📤 Send Invitation</button>
       </form>
     </div>
 
     <!-- Step 2: RSVP Back -->
     <div class="section">
-      <h2>RSVP</h2>
+      <h2>📝 RSVP</h2>
       <form id="rsvpForm">
-        <label for="fullname">Full Name *</label>
+        <label for="fullname">👤 Full Name *</label>
         <input type="text" id="fullname" required>
 
-        <label for="attending">Attending *</label>
+        <label for="attending">✅ Attending *</label>
         <select id="attending" required>
           <option value="">Please choose</option>
-          <option value="Yes">Yes — I will attend</option>
-          <option value="No">No — cannot attend</option>
+          <option value="Yes">🎉 Yes — I will attend</option>
+          <option value="No">😔 No — cannot attend</option>
         </select>
 
-        <button type="submit" class="btn">Send RSVP</button>
+        <button type="submit" class="btn">📩 Send RSVP</button>
       </form>
     </div>
   </aside>
@@ -194,21 +194,20 @@
 
 <script>
 // Step 1: Send Invite to Guest
-const inviteForm = document.getElementById('inviteForm');
-inviteForm.addEventListener('submit', e => {
+document.getElementById('inviteForm').addEventListener('submit', e => {
   e.preventDefault();
   let guestname = document.getElementById('guestname').value.trim();
   let admit = document.getElementById('admit').value.trim();
   let guestphone = document.getElementById('guestphone').value.trim();
 
   if (!guestname || !admit || !guestphone) {
-    alert("Please complete all required fields.");
+    alert("⚠️ Please complete all required fields.");
     return;
   }
 
   guestphone = guestphone.replace(/\D/g, "");
   if (!guestphone.startsWith("27")) {
-    alert("Please enter number with country code, e.g. 27821234567");
+    alert("⚠️ Please enter number with country code, e.g. 27821234567");
     return;
   }
 
@@ -217,45 +216,45 @@ inviteForm.addEventListener('submit', e => {
 
 Dear ${guestname},
 
-You are invited to the nikah and reception of  
+You are invited to the nikah 🕌 and reception of  
 ✨ _Imtiaz Kader & Ammaarah Minnie_ ✨
 
 🎟 *Admits:* ${admit}
 
 📅 *Date:* Saturday, 01 November 2025  
 🕒 *Time:* 2:00 PM  
-🍽 *Reception:* Will follow thereafter  
+🍽️ *Reception:* Will follow thereafter  
 📍 *Venue:* 45 Cotswold Road, Florida Hills, Roodepoort 1716  
 
 👉 Please RSVP before *10 October 2025* here: ${rsvpLink}  
 
-🌸 With joy in our hearts and duʿās, we invite you to share in this blessed beginning, In Shaa Allah. 🌸`;
+🌸 With joy in our hearts and duʿās 🤲, we invite you to share in this blessed beginning, In Shaa Allah. 🌸
+`;
 
   window.open(`https://wa.me/${guestphone}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
-  alert("Invitation sent via WhatsApp!");
-  inviteForm.reset();
-}); // ✅ properly closed inviteForm handler
+  alert("✅ Invitation opened in WhatsApp!");
+  e.target.reset();
+});
 
 // Step 2: Guest RSVP back to you
-const rsvpForm = document.getElementById('rsvpForm');
-rsvpForm.addEventListener('submit', e => {
+document.getElementById('rsvpForm').addEventListener('submit', e => {
   e.preventDefault();
   let fullname = document.getElementById('fullname').value.trim();
   let attending = document.getElementById('attending').value;
 
   if (!fullname || !attending) {
-    alert("Please complete all required fields.");
+    alert("⚠️ Please complete all required fields.");
     return;
   }
 
   const msg = `📩 *RSVP for Imtiaz & Amaarah*  
 
-Name: ${fullname}  
-Attending: ${attending}`;
+👤 Name: ${fullname}  
+✅ Attending: ${attending}`;
   const phone = "27748741008"; // Your WhatsApp number
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
-  alert("RSVP sent via WhatsApp!");
-  rsvpForm.reset();
+  alert("✅ RSVP opened in WhatsApp!");
+  e.target.reset();
 });
 </script>
 
