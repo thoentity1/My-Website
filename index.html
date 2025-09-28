@@ -206,6 +206,7 @@ inviteForm.addEventListener('submit', e => {
     return;
   }
 
+  // Remove non-digit chars
   guestphone = guestphone.replace(/\D/g, "");
   if (!guestphone.startsWith("27")) {
     alert("Please enter number with country code, e.g. 27821234567");
@@ -213,7 +214,9 @@ inviteForm.addEventListener('submit', e => {
   }
 
   const rsvpLink = "https://thoentity1.github.io/nikahI-A/";
-  const msg = `💍 *Wedding Invitation* 💍
+
+  // Use unicode emojis
+  const msg = `\u{1F48D} *Wedding Invitation* \u{1F48D}
 
 Dear ${guestname},
 
@@ -225,11 +228,11 @@ You are invited to the nikah and reception of
 📅 *Date:* Saturday, 01 November 2025  
 🕒 *Time:* 2:00 PM  
 🍽 *Reception:* Will follow thereafter  
-📍 *Venue:* 45 Cotswold Road, Florida Hills, Roodepoort 1716  
+📍 *Venue:* 45 Cotswold Road, Florida Hills, Roodepoort 1716
 
-👉 Please RSVP before *10 October 2025* here: ${rsvpLink}  
+👉 Please RSVP before *10 October 2025* here: ${rsvpLink}
 
-🌸 With joy in our hearts and duʿās, we invite you to share in this blessed beginning, In Shaa Allah. 🌸
+\ud83C\udf38 With joy in our hearts and duʿās, we invite you to share in this blessed beginning, In Shaa Allah. \ud83C\udf38
 `;
 
   window.open(
