@@ -1,27 +1,30 @@
-<form id="inviteForm">
-  <input type="text" id="guestname" placeholder="Guest Name" required>
-  <input type="text" id="admit" placeholder="Number of Admits" required>
-  <input type="text" id="guestphone" placeholder="WhatsApp Number (e.g. 27621234567)" required>
-  <button type="submit">Send Invite</button>
-</form>
-
 <script>
-const inviteForm = document.getElementById("inviteForm");
-
-inviteForm.addEventListener("submit", function(e) {
+// Step 1: Send Invite to Guest
+const inviteForm = document.getElementById('inviteForm');
+inviteForm.addEventListener('submit', e => {
   e.preventDefault();
+  let guestname = document.getElementById('guestname').value.trim();
+  let admit = document.getElementById('admit').value.trim();
+  let guestphone = document.getElementById('guestphone').value.trim();
 
-  const guestname = document.getElementById("guestname").value;
-  const admit = document.getElementById("admit").value;
-  const guestphone = document.getElementById("guestphone").value;
+  if (!guestname || !admit || !guestphone) {
+    alert("Please complete all required fields.");
+    return;
+  }
 
-  // RSVP link
+  guestphone = guestphone.replace(/\D/g, "");
+  if (!guestphone.startsWith("27")) {
+    alert("Please enter number with country code, e.g. 27821234567");
+    return;
+  }
+
+  // Updated RSVP link
   const rsvpLink = "https://thoentity1.github.io/nikahI-A/";
   const msg = `💍 *Wedding Invitation* 💍
 
 Dear ${guestname},
 
-You are invited to the nikah and reception of
+You are invited to the nikah and reception of  
 ✨ _Imtiaz Kader & Ammaarah Minnie_ ✨
 
 🎟 *Admits:* ${admit}
@@ -33,10 +36,10 @@ You are invited to the nikah and reception of
 
 👉 Please RSVP before *10 October 2025* here: ${rsvpLink}  
 
-🌸 With joy in our hearts and duʿās on our lips, we invite you to share in this blessed beginning, In Shaa Allah. 🌸
+🌸 With joy in our hearts and duʿās, we invite you to share in this blessed beginning, In Shaa Allah. 🌸
 `;
 
-  // Open WhatsApp
+  // Open WhatsApp with prefilled message
   window.open(
     `https://wa.me/${guestphone}?text=${encodeURIComponent(msg)}`,
     "_blank",
@@ -45,5 +48,24 @@ You are invited to the nikah and reception of
 
   alert("Invitation sent via WhatsApp!");
   inviteForm.reset();
+}); // ✅ properly closed Step 1 event listener
+
+// Step 2: Guest RSVP back to you
+const rsvpForm = document.getElementById('rsvpForm');
+rsvpForm.addEventListener('submit', e => {
+  e.preventDefault();
+  let fullname = document.getElementById('fullname').value.trim();
+  let attending = document.getElementById('attending').value;
+
+  if (!fullname || !attending) {
+    alert("Please complete all required fields.");
+    return;
+  }
+
+  const msg = `📩 *RSVP for Imtiaz & Amaarah*\n\nName: ${fullname}\nAttending: ${attending}`;
+  const phone = "27748741008"; // Your WhatsApp number
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  alert("RSVP sent via WhatsApp!");
+  rsvpForm.reset();
 });
 </script>
